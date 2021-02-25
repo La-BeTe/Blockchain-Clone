@@ -1,0 +1,27 @@
+{
+	"name": "my-blockchain-clone",
+	"version": "1.0.0",
+	"description": "Clone of the blockchain",
+	"scripts": {
+		"watch:server": "nodemon --inspect src/server/app.ts",
+		"watch:client": "rm -rf dist && mkdir dist dist\\client && cp src/client/index.html dist/client && tsc -p src/client/tsconfig.json -w",
+		"build:client": "mkdir dist\\client && cp src/client/index.html dist/client && tsc -p src/client/tsconfig.json",
+		"build:server": "tsc -p src/server/tsconfig.json",
+		"build": "rm -rf dist && mkdir dist && npm run build:ui && npm run build:server",
+		"start": "node dist/server/app"
+	},
+	"author": "La-BeTe",
+	"license": "ISC",
+	"devDependencies": {
+		"@types/express": "^4.17.11",
+		"@types/node": "^14.14.22",
+		"@types/socket.io": "^2.1.13",
+		"nodemon": "^2.0.7",
+		"ts-node": "^9.1.1",
+		"typescript": "^4.1.5"
+	},
+	"dependencies": {
+		"express": "^4.17.1",
+		"socket.io": "^3.1.1"
+	}
+}

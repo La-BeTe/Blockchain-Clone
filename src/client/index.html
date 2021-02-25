@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Blockchain</title>
+		<style>
+			:root {
+				--border: 1px solid grey;
+			}
+			/* Resets */
+			* {
+				margin: 0;
+				padding: 0;
+				box-sizing: border-box;
+			}
+			body {
+				max-width: 600px;
+				margin: 0 auto;
+				font-family: -apple-system, BlinkMacSystemFont, "Segoe UI",
+					Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans",
+					"Helvetica Neue", sans-serif;
+			}
+			h1 {
+				font-weight: 500;
+				margin: 10px 0;
+			}
+			h2 {
+				margin-top: 5px;
+				margin-bottom: 10px;
+				font-size: 1.2rem;
+			}
+			input {
+				padding: 10px;
+				border-radius: 7px;
+				outline: none;
+				border: var(--border);
+			}
+			button[type="submit"] {
+				background-color: black;
+				color: white;
+				padding: 10px 15px;
+				outline: none;
+				border: none;
+				border-radius: 7px;
+				display: block;
+				margin-left: auto;
+				margin-top: 10px;
+				cursor: pointer;
+			}
+			button[type="submit"]:hover {
+				background: lightgrey;
+				color: black;
+			}
+			button[type="submit"].disabled {
+				background: lightgrey;
+				color: grey;
+				cursor: not-allowed;
+			}
+
+			/* Status */
+			#statusEl {
+				border: var(--border);
+				padding: 15px;
+				margin: 20px 0;
+			}
+
+			/* Add Transaction */
+			#add-transaction > div {
+				display: flex;
+				justify-content: space-between;
+				align-items: center;
+			}
+
+			/* Pending Transactions */
+			#pending-transactions > div {
+				border: var(--border);
+				padding: 10px 25px 5px;
+				height: 150px;
+				overflow: auto;
+			}
+			#pending-transactions > div > pre {
+				margin-bottom: 4px;
+			}
+
+			/* Blockchain State */
+			#blocks-container {
+				display: flex;
+				flex-wrap: wrap;
+				justify-content: space-between;
+			}
+			.block {
+				max-width: 250px;
+				border: var(--border);
+				padding: 10px;
+				margin: 10px;
+				border-radius: 10px;
+			}
+			.block-heading {
+				display: flex;
+				justify-content: space-between;
+				align-items: center;
+			}
+			.block-heading > p {
+				color: grey;
+				font-size: 0.7rem;
+			}
+			.block-hashes {
+				color: grey;
+				font-size: 0.8rem;
+				padding: 10px 0;
+				font-weight: bold;
+			}
+			.block-hashes span {
+				color: black;
+				display: inline-block;
+				overflow: auto;
+				font-size: 0.7rem;
+				font-weight: normal;
+				margin-top: 5px;
+				width: 100%;
+			}
+			.transactions > p {
+				font-size: 0.8rem;
+				color: grey;
+				font-weight: bold;
+				text-transform: uppercase;
+			}
+			.transactions > div {
+				overflow: auto;
+			}
+			.transactions pre {
+				font-size: 0.8rem;
+				margin-left: 5px;
+				display: inline;
+			}
+		</style>
+	</head>
+	<body>
+		<h1>Blockchain</h1>
+		<div id="statusEl"></div>
+		<form id="add-transaction">
+			<h2>Add Transaction</h2>
+			<div>
+				<input type="text" id="senderEl" placeholder="Sender" />
+				&rarr;
+				<input type="text" id="receiverEl" placeholder="Receiver" />
+				<input type="number" id="amountEl" placeholder="Amount" />
+			</div>
+			<button type="submit" class="disabled" id="addTransactionBtn">
+				TRANSFER MONEY
+			</button>
+		</form>
+		<div id="pending-transactions">
+			<h2>Pending Transactions</h2>
+			<div id="pending-transactions-div">
+				<pre>No pending transactions at the moment.</pre>
+			</div>
+		</div>
+		<div id="blockchain-state">
+			<h2>Blockchain State</h2>
+			<div id="blocks-container"></div>
+		</div>
+		<script src="/socket.io/socket.io.js"></script>
+		<script src="main.js" type="module"></script>
+	</body>
+</html>
